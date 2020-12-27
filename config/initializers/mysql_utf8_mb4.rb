@@ -3,7 +3,7 @@
 # We also want our mysql databases to use utf8_mb4 encoding (the real unicode)
 # This monkey patch is from the following Github comment:
 # https://github.com/rails/rails/issues/9855#issuecomment-57665404
-config = ActiveRecord::Base.configurations[Rails.env]
+config = ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).first
 
 if ENV['USE_UTF8MB4'] && config['adapter'] == 'mysql2'
   config['encoding'] = 'utf8mb4'
