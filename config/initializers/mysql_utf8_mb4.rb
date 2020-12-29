@@ -5,9 +5,9 @@
 # https://github.com/rails/rails/issues/9855#issuecomment-57665404
 config = ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).first
 
-if ENV['USE_UTF8MB4'] && config['adapter'] == 'mysql2'
-  config['encoding'] = 'utf8mb4'
-  config['collation'] = 'utf8mb4_bin'
+if ENV['USE_UTF8MB4'] && config.adapter == 'mysql2'
+  config.configuration_hash[:encoding] = 'utf8mb4'
+  config.configuration_hash[:collation] = 'utf8mb4_bin'
 
   ActiveRecord::ConnectionAdapters::Mysql2Adapter.class_eval do
     # enhance included create_table method
